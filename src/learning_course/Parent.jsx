@@ -24,8 +24,9 @@ const Parent = () => {
             {persons.map((person) => {
                 return <Child person={person}></Child>
             })}
+
         </div>
-    )
+    );
 }
 
 export default Parent;
