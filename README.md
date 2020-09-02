@@ -1,4 +1,4 @@
-# learning_react
+# react_course
 ---
 #### Requirement
 > node.js(v12.18.3) includes npm (v6.14.6)  
