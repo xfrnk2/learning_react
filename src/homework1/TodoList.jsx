@@ -6,7 +6,7 @@ const TodoList = () => {
     let [currentStatus, setCurrentStatus] = useState("휴식");
 
     let works = [{subject: "빨래 널기", content: "빨래를 야무지게 널어야 구겨지지 않는다. 꼭 탈탈 털어서 털자."},
-        {subject: "청소기 밀기", content: "로봇청소기 돌리자"}
+        {subject: "청소기 밀기", content: "로봇청소기 돌리자", created_at: "2020-08-15 14:33:22"}
         ];
    
 
@@ -26,7 +26,7 @@ const TodoList = () => {
         <button onClick={changeStatus}>{currentStatus}</button>
        </div>
        <div>
-        {works.map((todo) => { return <Todo todo={todo}></Todo>})}
+        {works.map((todo, index) => { return <Todo key={index} todo={todo}></Todo>})}
        </div>
        </Fragment>
    );

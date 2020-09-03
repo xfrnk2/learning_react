@@ -6,8 +6,8 @@ import TodoApp from './homework1/TodoApp';
 ReactDOM.render(
   <React.StrictMode>
     <App />
-    <text><br></br><br></br><br></br><br></br><br></br></text>
-    <TodoApp />
+ 
+    {/* <TodoApp /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

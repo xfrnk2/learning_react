@@ -1,41 +1,60 @@
 import React, {useState, useEffect, Fragment} from 'react';
+import axios from 'axios';
 
 const Example = ({ }) => {
-    // let sweats = [50, 30, 100];
+    let [foods, setFoods] = useState([]);
+    let [form, setForm] = useState({
+        title: "",
+        reason: ""
+    });
 
-    // let banana = sweats[0];
-    // let apple = sweats[1];
-    // let berry = sweats[2];
+    useEffect(() => {
+        axios.get("/posts")
+            .then((response) => {
+                console.log(response);
 
-    // let [banana, apple, berry] = sweats;
-    let [name, setName] = useState("신형준");
-    let [num, setNum] = useState(0);
-
-    const changeName = () => {
-        setName("신태호");
-
-    };
-
-    const AddNum = () => {
-        setNum(num + 1)
+                setFoods(response.data);
+                
+            })
+            .catch((error) => {
+                console.log(error);
+            });
+    },[]);
+ 
+    const changeForm = (content) => {
+        setForm({...form,
+            [content.target.name]: content.target.value
+        });        
     }
-
-    const MinNum = () => {
-        setNum(num - 1)
+    const showForm = (event) => {
+        event.preventDefault();
+        
+        axios.post("/posts", form)
+            .then((response) => {
+                
+                console.log(response);
+            })
+            .catch((error) => {
+                console.log(error);
+            });
     }
-
+    
 
     return (
         <Fragment>
             <div>
-                <button onClick={changeName}>바꿔</button>
-                {name}
+                <form onSubmit={(event)=>{showForm(event)}}>
+                    <input type="text" name="title" onChange={(e) => {changeForm(e)}}/>
+                    <input type="text" name="reason" onChange={(e) => {changeForm(e)}}/>
+
+                    <button>submit</button>
+                </form>
+                
+                {foods.map((food) => { 
+                    return <div className="food">{food.title}</div>
+                })}
             </div>
-            <div>
-                {num}
-                <button onClick={AddNum}>+</button>
-                <button onClick={MinNum}>-</button>
-            </div>
+     
         </Fragment>
 
     );
