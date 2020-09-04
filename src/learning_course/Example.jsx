@@ -31,8 +31,8 @@ const Example = ({ }) => {
         
         axios.post("/posts", form)
             .then((response) => {
-                
                 console.log(response);
+                setFoods([...foods, form])
             })
             .catch((error) => {
                 console.log(error);
@@ -50,8 +50,8 @@ const Example = ({ }) => {
                     <button>submit</button>
                 </form>
                 
-                {foods.map((food) => { 
-                    return <div className="food">{food.title}</div>
+                {foods.map((food, index) => { 
+                    return <div key={index} className="food">{food.title}</div>
                 })}
             </div>
      
