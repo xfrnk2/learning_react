@@ -1,6 +1,7 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Todo from './Todo';
 import axios from 'axios';
+
 const TodoList = () => {
 
     let [todos, setTodos] = useState([]);
@@ -30,12 +31,7 @@ const TodoList = () => {
         }
     }
     const changeWritingMode = () => {
-        if (writingMode === true) {
-            setWritingMode(false);
-        }
-        else {
-            setWritingMode(true);
-        }
+        setWritingMode(!writingMode);
     }
 
     const create = (event) => {
@@ -64,6 +60,31 @@ const TodoList = () => {
 
     }
 
+    const update = (event, form, todo, setEditMode) => {
+
+        event.preventDefault();
+
+
+
+
+        axios.patch('/todos/' + todo.id, form)
+            .then((response) => {
+                setTodos(todos.map(todoData => {
+                    if (todoData.id === response.data.id)
+                        return response.data;
+
+                    return todoData;
+                }));
+
+                setEditMode(false);
+
+            })
+            .catch((error) => {
+                console.log(error)
+            });
+
+    }
+
 
 
     return (
@@ -72,28 +93,25 @@ const TodoList = () => {
                 할 일 목록 <text><br></br></text>
                 <button onClick={changeStatus}>{currentStatus}</button>
             </div>
-            <div>
-                {todos.map((todo, index) => { return <Todo key={index} todo={todo}></Todo> })}
-            </div>
-            <button type="button" onClick={(event) => { changeWritingMode(event) }}> 할일 생성</button>
+            <button type="button" onClick={() => { changeWritingMode() }}> 할일 생성</button>
             <div>
                 {writingMode
                     ?
-                    <Fragment>
-                        <div>
-                            <form onSubmit={(event) => { create(event) }}>
-                                <input type="text" name="subject" onChange={(e) => { changeForm(e) }} placeholder={"할일"}></input>
-                                <input type="text" name="content" onChange={(e) => { changeForm(e) }} placeholder={"할일 설명"}></input>
-                                <input type="text" name="date" onChange={(e) => { changeForm(e) }} placeholder={"완료 예정일"}></input>
-                                <button type="submit"> 확인</button>
-                                <button onClick={(event) => changeWritingMode(event)}>취소</button>
-                            </form>
 
-                        </div>
-                    </Fragment>
+                    <form onSubmit={(event) => { create(event) }}>
+                        <input type="text" name="subject" onChange={(e) => { changeForm(e) }} placeholder={"할일"}></input>
+                        <input type="text" name="content" onChange={(e) => { changeForm(e) }} placeholder={"할일 설명"}></input>
+                        <input type="text" name="date" onChange={(e) => { changeForm(e) }} placeholder={"완료 예정일"}></input>
+                        <button type="submit"> 확인</button>
+                        <button onClick={(event) => changeWritingMode(event)}>취소</button>
+                    </form>
                     :
                     null
                 }
+  
+                {todos.map((todo) => {
+                    return <Todo key={todo.id} todo={todo} todos={todos} setTodos={setTodos} update={update}></Todo>;
+                })}
             </div>
 
         </Fragment>
