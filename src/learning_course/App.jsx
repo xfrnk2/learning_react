@@ -1,13 +1,14 @@
 import React from 'react';
 import Parent from './Parent';
-import Example from './Example';
+import Foods from './Foods';
 
 const App = () => {
   return (
     <div>
-      <Example></Example>
+      <Foods></Foods>
+
     </div>
-  );
+  ); 
 }
 
 export default App;
