@@ -11,9 +11,6 @@ const TodoList = () => {
         content: "",
         date: ""
     });
-    // let todos = [{ subject: "빨래 널기", content: "빨래를 야무지게 널어야 구겨지지 않는다. 꼭 탈탈 털어서 털자.", date: "2020-08-15 14:33:22" },
-    // { subject: "청소기 밀기", content: "로봇청소기 돌리자", date: "2020-08-15 14:33:22" }
-    // ];
 
     useEffect(() => {
         axios.get("/todos")
@@ -95,7 +92,7 @@ const TodoList = () => {
                         </div>
                     </Fragment>
                     :
-                    <form>없지</form>
+                    null
                 }
             </div>
 
