@@ -1,11 +1,16 @@
 import React, { Fragment, useState, useEffect } from 'react';
 import Todo from './Todo';
 import axios from 'axios';
+import { connect } from 'react-redux';
 
 const TodoList = () => {
 
     let [todos, setTodos] = useState([]);
     let [currentStatus, setCurrentStatus] = useState("휴식");
+    let [message, setMessage] = useState({
+        subject: "",
+        status: ""
+    });
     let [writingMode, setWritingMode] = useState(false);
     let [form, setForm] = useState({
         subject: "",
@@ -14,8 +19,15 @@ const TodoList = () => {
     });
 
     useEffect(() => {
+
+        window.setLoading(true);
+
         axios.get("/todos")
             .then((response) => {
+                setTimeout(() => {
+
+                    window.setLoading(false);
+                }, 2000);
                 setTodos(response.data);
             })
             .catch((error) => {
@@ -36,12 +48,29 @@ const TodoList = () => {
 
     const create = (event) => {
         event.preventDefault();
-        console.log(event)
-        console.log(todos)
-        console.log(form)
+
+
+        window.setLoading(true);
+
         axios.post("/todos", form)
             .then((response) => {
-                console.log(response.data);
+
+                setMessage({
+                    subject: form.subject,
+                    status: "생성"
+                });
+                window.setLoading(true);
+
+
+
+                setTimeout(() => {
+
+                    window.setLoading(false);
+
+                }, 2000);
+
+
+
                 setTodos([...todos, response.data]);
                 changeWritingMode();
             })
@@ -67,8 +96,22 @@ const TodoList = () => {
 
 
 
+
         axios.patch('/todos/' + todo.id, form)
             .then((response) => {
+
+                setMessage({
+                    subject: form.subject,
+                    status: "수정"
+                });
+                window.setLoading(true);
+
+
+                setTimeout(() => {
+
+                    window.setLoading(false);
+
+                }, 2000);
                 setTodos(todos.map(todoData => {
                     if (todoData.id === response.data.id)
                         return response.data;
@@ -90,8 +133,15 @@ const TodoList = () => {
     return (
         <Fragment>
             <div>
-                할 일 목록 <text><br></br></text>
-                <button onClick={changeStatus}>{currentStatus}</button>
+                <div className="header">
+                    할 일 목록 <text><br></br></text>
+                </div>
+
+                {window.getLoading() && message.status !== "" ?
+                    '"' + message.subject + '"가 ' + message.status + " 되었습니다." : ""}
+                <text><br></br></text>
+
+                <button className="statusIcon" onClick={changeStatus}>{currentStatus}</button>
             </div>
             <button type="button" onClick={() => { changeWritingMode() }}> 할일 생성</button>
             <div>
@@ -108,9 +158,10 @@ const TodoList = () => {
                     :
                     null
                 }
-  
+
                 {todos.map((todo) => {
-                    return <Todo key={todo.id} todo={todo} todos={todos} setTodos={setTodos} update={update}></Todo>;
+                    return <Todo key={todo.id} todo={todo} todos={todos} setTodos={setTodos}
+                        setMessage={setMessage} update={update}></Todo>;
                 })}
             </div>
 
@@ -118,4 +169,10 @@ const TodoList = () => {
     );
 }
 
-export default TodoList;
+
+const mapStateToProps = (state) => {
+    return {
+        loading: state.common.loading
+    }
+};
+export default connect(mapStateToProps, null)(TodoList);

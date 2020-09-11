@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 
 
-const Todo = ({ todo, todos, update, setTodos}) => {
+const Todo = ({ todo, todos, update, setTodos, setMessage }) => {
 
     let [editMode, setEditMode] = useState(false);
     let [form, setForm] = useState({
@@ -32,14 +32,29 @@ const Todo = ({ todo, todos, update, setTodos}) => {
 
 
     const deleteTodo = (todos) => {
-        Axios.delete('/todos/' +todo.id)
-        .then((response) => {
-            setTodos(todos.filter((targetTodo) => {return targetTodo.id !== todo.id}))
+        
+        
 
-        })
-        .catch((error) => {
-            console.log(error)
-        })
+        Axios.delete('/todos/' + todo.id)
+            .then((response) => {
+                
+                setMessage({
+                    subject: todo.subject,
+                    status: "삭제"
+                });
+                window.setLoading(true);
+
+                setTimeout(() => {
+
+                    window.setLoading(false);
+
+                }, 2000);
+                setTodos(todos.filter((targetTodo) => { return targetTodo.id !== todo.id }))
+
+            })
+            .catch((error) => {
+                console.log(error)
+            })
 
 
     }
@@ -52,7 +67,7 @@ const Todo = ({ todo, todos, update, setTodos}) => {
 
 
     return (
-        <div>
+        <div className="todoBox">
             {editMode
                 ?
                 <form onSubmit={(event) => { submit(event) }}>
@@ -67,8 +82,8 @@ const Todo = ({ todo, todos, update, setTodos}) => {
                     {todo.subject}  　 {todo.date}
                     <text><br></br></text>
                     {todo.content}
-                    <button onClick={() => {changeEditMode()}}>수정</button>
-                    <button onClick={() => {deleteTodo(todos)}}>삭제</button>
+                    <button onClick={() => { changeEditMode() }}>수정</button>
+                    <button onClick={() => { deleteTodo(todos) }}>삭제</button>
                 </div>
             }
         </div>
