@@ -4,7 +4,7 @@ import Axios from 'axios';
 
 
 
-const Todo = ({ todo, todos, update, setTodos, setMessage }) => {
+const Todo = ({ todo, todos, update, setTodos }) => {
 
     let [editMode, setEditMode] = useState(false);
     let [form, setForm] = useState({
@@ -19,8 +19,6 @@ const Todo = ({ todo, todos, update, setTodos, setMessage }) => {
             [e.target.name]: e.target.value
         })
     }
-
-
 
     const changeEditMode = () => {
         setEditMode(!editMode)
@@ -38,17 +36,8 @@ const Todo = ({ todo, todos, update, setTodos, setMessage }) => {
         Axios.delete('/todos/' + todo.id)
             .then((response) => {
                 
-                setMessage({
-                    subject: todo.subject,
-                    status: "삭제"
-                });
-                window.setLoading(true);
-
-                setTimeout(() => {
-
-                    window.setLoading(false);
-
-                }, 2000);
+                window.setMessage(`${form.subject}가 삭제 되었습니다.`);
+    
                 setTodos(todos.filter((targetTodo) => { return targetTodo.id !== todo.id }))
 
             })
@@ -58,13 +47,6 @@ const Todo = ({ todo, todos, update, setTodos, setMessage }) => {
 
 
     }
-
-
-
-
-
-
-
 
     return (
         <div className="todoBox">
@@ -79,7 +61,8 @@ const Todo = ({ todo, todos, update, setTodos, setMessage }) => {
                 </form>
                 :
                 <div>
-                    {todo.subject}  　 {todo.date}
+                    {todo.subject}  　 
+                    {todo.date}
                     <text><br></br></text>
                     {todo.content}
                     <button onClick={() => { changeEditMode() }}>수정</button>

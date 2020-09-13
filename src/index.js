@@ -5,19 +5,9 @@ import TodoApp from './homework1/TodoApp';
 // import store from './store';
 import store from './todoStore';
 // import { setLoading } from './learning_course/actions/commonActions';
-import { setLoading } from './homework1/actions/todoActions';
+import {setMessage} from './homework1/actions/commonActions';
 
-window.store = store;
-
-window.setLoading = (data) => {
-  store.dispatch(setLoading(data));
-};
-
-
-window.getLoading = () => {
-  return store.getState().common.loading;
-}
-
+window.setMessage = (data) => {store.dispatch(setMessage(data))}
 
 ReactDOM.render(
    <React.StrictMode>

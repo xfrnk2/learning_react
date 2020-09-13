@@ -6,3 +6,13 @@
 .navigations {text-align:center; border:1px solid red;}
 .statusIcon {text-align:center}
 .todoBox {margin:1px; border:1px solid; background-color:rgb(223, 244, 252);}
+
+.message {
+    position: fixed;
+    top: 40px;
+    right: 40px;
+    background-color: black;
+    color: #fff;
+    padding: 10px 30px;
+    box-shadow:0px 3px 6px rgba(0,0,0,0.16);
+}

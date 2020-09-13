@@ -1,6 +1,7 @@
 const inititalState = {
     targetName: null,
-    loading: true
+    loading: true,
+    message : null
 };
 
 export default (state = inititalState, action) => {
@@ -14,6 +15,10 @@ export default (state = inititalState, action) => {
                 loading: action.payload
             }
 
-
+        case "SET_MESSAGE":
+            return {
+                ...state,
+                message: action.payload
+            }
     }
 };
