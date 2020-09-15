@@ -1,6 +1,10 @@
+import { getLocalToken, getLocalUser } from '../../utils/auth';
+
 const inititalState = {
     flash: null,
-    loading: true
+    loading: true,
+    user: getLocalUser(),
+    token: getLocalToken()
 };
 
 export default (state = inititalState, action) => {
@@ -18,6 +22,18 @@ export default (state = inititalState, action) => {
             return {
                 ...state,
                 flash: action.payload
+            }
+
+        case "SET_USER":
+            return {
+                ...state,
+                user: action.payload
+            }
+
+        case "SET_TOKEN":
+            return {
+                ...state,
+                token: action.payload
             }
     }
 };

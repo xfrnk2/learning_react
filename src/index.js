@@ -11,9 +11,9 @@ window.setMessage = (data) => {store.dispatch(setMessage(data))}
 
 ReactDOM.render(
    <React.StrictMode>
-    {/* <App /> */}
+    <App />
  
-    <TodoApp />
+    {/* <TodoApp /> */}
   </React.StrictMode>,
   document.getElementById('root')
 );

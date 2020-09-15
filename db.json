@@ -1,4 +1,61 @@
 {
+  "users": [
+    {
+      "email": "test@naver.com",
+      "password": "$2a$10$6HummsABwSHuJNVENyCoYePLqikQyNMCP0usXvNHmcXLnRDBh4yWm",
+      "id": 1
+    },
+    {
+      "email": "12312@naver.com",
+      "password": "$2a$10$dyn12s1nvj2HbJSUOv/UKOGfoiUxoFPbcVmvm4sq/doNte/MqvCfu",
+      "id": 2
+    },
+    {
+      "email": "fdsfsd@naver.com",
+      "password": "$2a$10$WUvi8nj4reHTYRl25GbAau2thTfgVo5S4gyKI91XPtKx3xelyr/cy",
+      "id": 3
+    },
+    {
+      "email": "asdfs@naver.com",
+      "password": "$2a$10$AarZbUBjxAohflpDaCYJ3uRQ1fCwk7Z4I7JR/rpjVrpy8hFyBO2xK",
+      "id": 4
+    },
+    {
+      "email": "adfsdf@naver.com",
+      "password": "$2a$10$un0uv81VPXsjGAMTFzvBCO2fYl3y1rnsGAfbGFgD/PavdcLsFKNwi",
+      "id": 5
+    },
+    {
+      "email": "sdfas@naver.com",
+      "password": "$2a$10$8Up2Tu8ALa.8lE.GmVpR7eRnjQqBCGmkrimTmtq9u1YrtdeouEbh2",
+      "id": 6
+    },
+    {
+      "email": "ssa1231232@naver.com",
+      "password": "$2a$10$ggJ76V2RJmCbpLpMYCEYR.xRUOkyGG4997kyemkIMjAtIdgTSO8JW",
+      "id": 7
+    },
+    {
+      "email": "123123213@naver.com",
+      "password": "$2a$10$Nz6JOZiRWLmD7k/j1UzQzOzQxxaYuTqpMcqY6PsKHJmYIYuxwJtCi",
+      "id": 8
+    },
+    {
+      "email": "ssa4141@nav123.com",
+      "password": "$2a$10$Lg8/x5Q/EiJY6TWRNEa05OpaAZeFGFy/goMkwuXVtCHH7OYP/T5pC",
+      "id": 9
+    },
+    {
+      "email": "123@naver.com",
+      "password": "$2a$10$u6cg2nQHcq0I50iGtpoiI.j/3GSuj/zh1XqqqG8vEjmBUN4eaaus.",
+      "id": 10
+    },
+    {
+      "email": "testtest@naver.com",
+      "password": "$2a$10$SMejRvgCJgPlmzH6YRtnMONe19JBBAojuoAwT3LMdUtpZOt1hnolq",
+      "id": 11
+    }
+  ],
   "foods": [
     {
       "title": "123ㄹㄴ",
